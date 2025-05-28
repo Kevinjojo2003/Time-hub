@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TimeHub</title>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Dynamic Background Container -->
+  <div id="main" class="background">
+    <!-- Navbar -->
+    <header class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">TimeHub</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="#clocks">Clocks</a></li>
+            <li class="nav-item"><a class="nav-link" href="#calendar">Calendar</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tools">Tools</a></li>
+            <li class="nav-item"><a class="nav-link" href="#alarms">Alarms</a></li>
+          </ul>
+          <button id="theme-toggle" class="btn btn-outline-light ms-3">🌙</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-5 mt-4 text-white">
+      <!-- Hero -->
+      <section class="text-center py-5">
+        <h1 class="display-4">Welcome to TimeHub</h1>
+        <p id="current-date" class="lead"></p>
+        <p class="fst-italic">
+          "The only limit to our realization of tomorrow is our doubts of today."
+        </p>
+      </section>
+
+      <!-- Dashboard Widgets -->
+      <div class="container" id="dashboard">
+        <div class="row g-4">
+          <!-- World Clocks -->
+          <div class="col-md-6 col-lg-4" id="clocks">
+            <div class="card glass">
+              <div class="card-body">
+                <h5 class="card-title">🌍 World Clocks</h5>
+                <ul class="list-group list-group-flush" id="world-clocks-list"></ul>
+                <div class="input-group mt-3">
+                  <select class="form-select" id="add-tz-select"></select>
+                  <button class="btn btn-primary" id="add-tz-btn">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendar -->
+          <div class="col-md-6 col-lg-4" id="calendar">
+            <div class="card glass">
+              <div class="card-body">
+                <h5 class="card-title">📅 Calendar</h5>
+                <input type="date" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Stopwatch -->
+          <div class="col-md-6 col-lg-4" id="stopwatch">
+            <div class="card glass">
+              <div class="card-body text-center">
+                <h5 class="card-title">⏱️ Stopwatch</h5>
+                <div id="sw-display" class="fs-2 mb-3">00:00:00</div>
+                <button class="btn btn-success me-2" onclick="startStopwatch()">Start</button>
+                <button class="btn btn-danger" onclick="resetStopwatch()">Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timer -->
+          <div class="col-md-6 col-lg-4" id="timer">
+            <div class="card glass">
+              <div class="card-body text-center">
+                <h5 class="card-title">⏳ Timer</h5>
+                <div id="timer-display" class="fs-2 mb-3">15:00</div>
+                <button class="btn btn-success me-2" onclick="startTimer()">Start</button>
+                <button class="btn btn-danger" onclick="resetTimer()">Reset</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timezone Converter -->
+          <div class="col-md-6 col-lg-4" id="tools">
+            <div class="card glass">
+              <div class="card-body">
+                <h5 class="card-title">🛫 Timezone Converter</h5>
+                <div class="row">
+                  <div class="col">
+                    <select class="form-select mb-2" id="from-tz"></select>
+                  </div>
+                  <div class="col">
+                    <select class="form-select mb-2" id="to-tz"></select>
+                  </div>
+                </div>
+                <p id="converted-time" class="fw-bold"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pomodoro -->
+          <div class="col-md-6 col-lg-4">
+            <div class="card glass">
+              <div class="card-body text-center">
+                <h5 class="card-title">🎯 Pomodoro Timer</h5>
+                <div id="pomodoro-time" class="fs-2 mb-3">25:00</div>
+                <button class="btn btn-success me-2" onclick="startPomodoro()">Start</button>
+                <button class="btn btn-danger" onclick="resetPomodoro()">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alarm Section -->
+      <section class="container mt-5" id="alarms">
+        <div class="card glass">
+          <div class="card-body">
+            <h5 class="card-title">🔔 Alarm Clock</h5>
+            <div class="d-flex justify-content-center align-items-center gap-2 mb-3">
+              <input type="time" id="alarmTime" class="form-control w-auto" />
+              <button class="btn btn-primary" onclick="setAlarm()">Set Alarm</button>
+            </div>
+            <ul id="alarmList" class="list-group"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 text-white">
+      © 2025 TimeHub by Kevin
+    </footer>
+  </div>
+
+  <!-- Alarm Sound -->
+  <audio id="alarmSound" src="alarm.mp3" preload="auto"></audio>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/min/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment-timezone@0.5.43/builds/moment-timezone-with-data.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

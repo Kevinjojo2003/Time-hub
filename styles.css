@@ -1,0 +1,52 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+}
+.background {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+}
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+header, footer {
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Hero */
+section.text-center {
+  padding-top: 6rem;
+  padding-bottom: 2rem;
+}
+
+/* List styling */
+#world-clocks-list li,
+#alarmList li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Alarm list */
+#alarmList button {
+  margin-left: 0.5rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 576px) {
+  .fs-2 { font-size: 1.5rem !important; }
+}
